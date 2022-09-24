@@ -24,7 +24,3 @@ def pokedex():
 
 
     return render_template('index.html', pokemon=pokemon)
-
-
-if __name__ == "__main__":
-    app.run(debug=True)
