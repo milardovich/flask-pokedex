@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<title>Pokedex</title>
+{% endblock %}
+
+{% block body %}
+<main>
+    <h1 class="visually-hidden">Heroes examples</h1>
+  
+    <div class="px-4 py-5 my-5 text-center">
+      <img class="d-block mx-auto mb-4" src="static/logo.svg" alt="" width="72" height="57">
+      <h1 class="display-5 fw-bold">Pokedex</h1>
+      <div class="col-lg-6 mx-auto">
+        <p class="lead mb-4">Utilizá el buscador para ver la información de un pokemón, o presioná el botón "aleatorio" para que el pokedex lo elija por vos.</p>
+        <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
+          <form action="/" method="GET">
+            <input type="text" class="form-control form-control-lg" name="pokemon" id="pokemon"> <br/>
+            <button type="submit" class="btn btn-primary btn-lg px-4 gap-3">Buscar</button>
+            <a href="?pokemon=random" class="btn btn-outline-secondary btn-lg px-4">Aleatorio</a>
+          </form>
+        </div>  <br/>
+        {% if not pokemon == '' and not pokemon == 'error' %}
+        <h2>Pokemon encontrado! {{ pokemon.forms[0].name }} #{{ pokemon.id }}</h2>
+        <img src="{{ pokemon.sprites.front_default }}" />
+        <table class="table table-striped">
+            <tbody>
+                <tr>
+                  <td>Tipo</td>
+                  <td>{% for type in pokemon.types %}<span class="badge bg-{{ type.type.name }}">{{ type.type.name }}</span> {% endfor %}</td>
+                </tr>
+                <tr>
+                  <td>Altura</td>
+                  <td>{{ pokemon.height }}</td>
+                </tr>
+                <tr>
+                  <td>Peso</td>
+                  <td>{{ pokemon.weight }}</td>
+                </tr>
+              </tbody>
+        </table>
+        {% elif pokemon == 'error' %}
+            <h2>Error! pokemon no encontrado</h2>
+        {% endif %}
+      </div>
+    </div>
+</main>    
+
+
+
+        
+        
+{% endblock %}
